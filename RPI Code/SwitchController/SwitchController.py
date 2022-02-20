@@ -6,13 +6,13 @@
 # TODO: Config files for this data
 motorpin1 = 1
 motorpin2 = 2
-plugip = "192.168.1.1"
-plugip2 = "192.168.2.1"
+plugip = "192.168.1.140"
 
 def main():
 
 class SwitchController:
-
+    from KasaSwitch import KasaSwitch
+    from 
 
 if __name__ == "__main__":
     main()
