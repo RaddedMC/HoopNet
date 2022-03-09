@@ -4,6 +4,8 @@
 # Co-designed with JarrettB
 
 import multiprocessing
+import time
+import RPi.GPIO as GPIO # Requires to do: sudo apt-get install rpi.gpio
 
 class DoorMotor:
     """Represents a URL hoop house lift motor.
@@ -18,6 +20,29 @@ class DoorMotor:
 
     is_lifted = False
     __proc__ = None
+
+    GPIO.setmode(GPIO.BOARD)
+
+    duty_cycle = 100 # 0 - 100 (No (low) to high speed)
+    motor_lift_lower_time = 5 # seconds
+
+    # Motor A pins
+    enA = 32 # Enable A pin for motor controller
+    GPIO.setup(enA, GPIO.OUT)
+    en_pin_A = GPIO.PWM(enA, 1) # PWN(Pin, Frequency (default 1))
+    in1 = 24 # Input 1 pin for motor controller
+    GPIO.setup(in1, GPIO.OUT)
+    in2 = 25 # Input 2 pin for motor controller
+    GPIO.setup(in2, GPIO.OUT)
+
+    # Motor B pins
+    enB = 23 # Enable B pin for motor controller
+    GPIO.setup(enB, GPIO.OUT)
+    en_pin_B = GPIO.PWM(enB, 1)
+    in3 = 36 # Input 3 pin for motor controller
+    GPIO.setup(in3, GPIO.OUT)
+    in4 = 38 # Input 4 pin for motor controller
+    GPIO.setup(in4, GPIO.OUT)
 
     def __init__(self):
         """Initialize the door motor object. Needs to be filled with actual data!
@@ -66,13 +91,39 @@ class DoorMotor:
     def __lift__(self):
         """Don't use this! It is just a helper method for DoorMotor.set_state()"""
         print("Started lifting a lift door!")
-        import time
-        time.sleep(10)
+        # Forward direction for Motor A
+        GPIO.output(in1, GPIO.LOW)
+        GPIO.output(in2, GPIO.HIGH)
+        en_pin_A.start(dutyCycle)
+        # Forward direction for Motor B
+        GPIO.output(in3, GPIO.LOW)
+        GPIO.output(in4, GPIO.HIGH)
+        en_pin_B.start(dutyCycle)
+        self.__stop_motors__()
         print("Door lifted. Remember that this needs to be actual code at some point!")
 
     def __lower__(self):
         """Don't use this! It is just a helper method for DoorMotor.set_state()"""
         print("Started lowering a lift door!")
-        import time
-        time.sleep(12)
+        # Reverse direction for Motor A
+        GPIO.output(in1, GPIO.HIGH)
+        GPIO.output(in2, GPIO.LOW)
+        en_pin_A.start(dutyCycle)
+        # Reverse direction for Motor B
+        GPIO.output(in3, GPIO.HIGH)
+        GPIO.output(in4, GPIO.LOW)
+        en_pin_B.start(dutyCycle)
+        self.__stop_motors__()
         print("Door lowered. Remember that this needs to be actual code at some point!")
+
+    def __stop_motors__(self):
+        # The time it takes for the motor to stop
+        time.sleep(motor_lift_lower_time)
+         # Stop Motor A
+        GPIO.output(in1, GPIO.LOW)
+        GPIO.output(in2, GPIO.LOW)
+        en_pin_A.stop
+        # Stop Motor B
+        GPIO.output(in3, GPIO.LOW)
+        GPIO.output(in4, GPIO.LOW)
+        en_pin_B.stop()
