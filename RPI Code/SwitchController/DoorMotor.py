@@ -1,6 +1,6 @@
 # ES1050 T24HoopNet
 # DoorMotor.py
-# Programmed by JamesN / Radded
+# Programmed by JamesN / Radded and JarrettB
 # Co-designed with JarrettB
 
 import multiprocessing
