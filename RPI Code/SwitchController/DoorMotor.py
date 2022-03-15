@@ -4,6 +4,7 @@
 # Co-designed with JarrettB
 
 import multiprocessing
+from multiprocessing.sharedctypes import Value
 import time
 import RPi.GPIO as GPIO # Requires to do: sudo apt-get install rpi.gpio
 
@@ -33,7 +34,13 @@ class DoorMotor:
     # pins = [enable, input1, input2]
     def __init__(self, pins):
         """Initialize the door motor object.
+            Takes an array of pin numbers as follows:
+            [enable pin, input1, input2]
         """
+
+        # Error check
+        if len(pins) != 3:
+            raise ValueError("")
 
         # Setup pins
         GPIO.setmode(GPIO.BOARD)
