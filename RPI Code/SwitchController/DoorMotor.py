@@ -94,8 +94,8 @@ class DoorMotor:
         print("Started lifting a lift door!")
 
         # Forward direction for Motor
-        GPIO.output(self.__pins__[0], GPIO.LOW)
-        GPIO.output(self.__pins__[1], GPIO.HIGH)
+        GPIO.output(self.__pins__[1], GPIO.LOW)
+        GPIO.output(self.__pins__[2], GPIO.HIGH)
         self.__pwm_enable__.start(self.duty_cycle)
 
         self.__stop_motors__()
@@ -106,8 +106,8 @@ class DoorMotor:
         print("Started lowering a lift door!")
 
         # Reverse direction for Motor A
-        GPIO.output(self.__pins__[0], GPIO.HIGH)
-        GPIO.output(self.__pins__[1], GPIO.LOW)
+        GPIO.output(self.__pins__[1], GPIO.HIGH)
+        GPIO.output(self.__pins__[2], GPIO.LOW)
         self.__pwm_enable__.start(self.duty_cycle)
         
         self.__stop_motors__()
