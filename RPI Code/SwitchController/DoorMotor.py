@@ -44,7 +44,6 @@ class DoorMotor:
 
         # Lower door on creation to ensure stored state matches actual state
         self.__run_proc_from_method_(self.__lower__)
-        pass
 
 
     ### USER-ACCESSIBLE
@@ -86,39 +85,32 @@ class DoorMotor:
     def __lift__(self):
         """Don't use this! It is just a helper method for DoorMotor.set_state()"""
         print("Started lifting a lift door!")
-        # Forward direction for Motor A
 
+        # Forward direction for Motor
+        GPIO.output(self.__pins__[0], GPIO.LOW)
+        GPIO.output(self.__pins__[1], GPIO.HIGH)
+        self.__pwm_enable__.start(self.duty_cycle)
 
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.HIGH)
-        en_pin_A.start(dutyCycle)
-        # Forward direction for Motor B
-        GPIO.output(in3, GPIO.LOW)
-        GPIO.output(in4, GPIO.HIGH)
-        en_pin_B.start(dutyCycle)
         self.__stop_motors__()
-        print("Door lifted. Remember that this needs to be actual code at some point!")
+        print("Door lifted.")
 
     def __lower__(self):
         """Don't use this! It is just a helper method for DoorMotor.set_state()"""
         print("Started lowering a lift door!")
 
         # Reverse direction for Motor A
-        GPIO.output(in1, GPIO.HIGH)
-        GPIO.output(in2, GPIO.LOW)
-        en_pin_A.start(dutyCycle)
+        GPIO.output(self.__pins__[0], GPIO.HIGH)
+        GPIO.output(self.__pins__[1], GPIO.LOW)
+        self.__pwm_enable__.start(self.duty_cycle)
         
         self.__stop_motors__()
-        print("Door lowered. Remember that this needs to be actual code at some point!")
+        print("Door lowered.")
 
     def __stop_motors__(self):
         # The time it takes for the motor to stop
-        time.sleep(motor_lift_lower_time)
-         # Stop Motor A
-        GPIO.output(in1, GPIO.LOW)
-        GPIO.output(in2, GPIO.LOW)
-        en_pin_A.stop
-        # Stop Motor B
-        GPIO.output(in3, GPIO.LOW)
-        GPIO.output(in4, GPIO.LOW)
-        en_pin_B.stop()
+        time.sleep(self.motor_lift_lower_time)
+
+         # Stop Motor
+        GPIO.output(self.__pins__[0], GPIO.LOW)
+        GPIO.output(self.__pins__[1], GPIO.LOW)
+        self.__pwm_enable__.stop()
