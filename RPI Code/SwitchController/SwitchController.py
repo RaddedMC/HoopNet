@@ -4,15 +4,44 @@
 # Co-designed with JarrettB
 
 # TODO: Config files for this data
-motorpin1 = 1
-motorpin2 = 2
-plugip = "192.168.1.140"
+motor_pins = [[1, 2, 3], [4, 5, 6]] # sample!
+plug_ips = ["192.168.1.140"] # works on James' AP
 
-def main():
+from KasaSwitch import KasaSwitch
+from DoorMotor import DoorMotor
+from KasaSwitch import KasaSwitch
 
 class SwitchController:
-    from KasaSwitch import KasaSwitch
-    from 
 
-if __name__ == "__main__":
-    main()
+    __switches__ = []
+
+    def __init__(self, motor_pins, plug_ips):
+        """ Central class to control all plugs and motors.
+        Needs a nested arrray of motor pins as such:
+        [
+            [enable, pin1, pin2], # for each motor
+            [enable, pin1, pin2]
+        ]
+
+        Needs an array of Kasa IP addresses as such:
+        [
+            ["192.168.1.140", "192.168.1.128"]
+        ]
+            TODO: add get states!
+        """
+
+        # Add motors
+        for motor_pinset in motor_pins:
+            self.__switches__.append(DoorMotor(motor_pinset))
+
+        # Add plugs
+        for plug_ip in plug_ips:
+            self.__switches__.append(KasaSwitch(plug_ip))
+
+    def turnOn(self):
+        for switch in self.__switches__:
+            switch.set_state(True)
+
+    def turnOff(self):
+        for switch in self.__switches__:
+            switch.set_state(False)

@@ -1,6 +1,6 @@
 # ES1050 T24HoopNet
 # Sensor.py
-# Programmed by JamesN / Radded and JarrettB
+# Programmed by JarrettB
 # Co-designed with JarrettB
 
 # Install instructions for sensor library at https://mic.st/blog/connect-temperature-and-humidity-sensor-am2320-dht11-or-dht22-to-raspberry-pi/
