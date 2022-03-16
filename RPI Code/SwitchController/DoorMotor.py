@@ -118,6 +118,6 @@ class DoorMotor:
         time.sleep(self.motor_lift_lower_time)
 
          # Stop Motor
-        GPIO.output(self.__pins__[0], GPIO.LOW)
         GPIO.output(self.__pins__[1], GPIO.LOW)
+        GPIO.output(self.__pins__[2], GPIO.LOW)
         self.__pwm_enable__.stop()
