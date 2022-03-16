@@ -11,6 +11,8 @@ from KasaSwitch import KasaSwitch
 from DoorMotor import DoorMotor
 from KasaSwitch import KasaSwitch
 
+import RPi.GPIO as GPIO # Requires to do: sudo apt-get install rpi.gpio
+
 class SwitchController:
 
     __switches__ = []
@@ -27,6 +29,8 @@ class SwitchController:
         ["192.168.1.140", "192.168.1.128"]
             TODO: add get states!
         """
+
+        GPIO.cleanup() 
 
         # Add motors
         for motor_pinset in motor_pins:
