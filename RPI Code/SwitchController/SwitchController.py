@@ -24,9 +24,7 @@ class SwitchController:
         ]
 
         Needs an array of Kasa IP addresses as such:
-        [
-            ["192.168.1.140", "192.168.1.128"]
-        ]
+        ["192.168.1.140", "192.168.1.128"]
             TODO: add get states!
         """
 
