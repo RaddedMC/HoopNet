@@ -29,7 +29,12 @@ switch_controller = None
 
 # MAIN LOOP
 def main():
-    pass
+    while True:
+        # Read sensor
+        sensor_data = sensor_controller.
+        # Check thresholds
+        # If out of threshold, open door!
+        # Sleep
 
 # SETUP
 def setup():
