@@ -17,7 +17,10 @@ def main():
 	# Get the values from the command line args
 	args = parser.parse_args()
 	state = args.state
-	wait_time = int(args.time)
+	if args.time is None:
+		wait_time = 0
+	else:
+		wait_time = int(args.time)
 
 	# Attempt to find the PID for the python script given
 	try:
@@ -32,12 +35,12 @@ def main():
 		os.kill(pid, signal.SIGCONT)
 	elif state == "close" or state == "Close": # Set to close state (override and send the singal to close)
 		os.kill(pid, signal.SIGUSR1) # Send the close signal
-		if wait_time is not type(None): # Check to make sure there's a value for wait_time
+		if wait_time > 0: # Check to make sure there's a value for wait_time
 			time.sleep(wait_time) # Wait then resume auto state
 			os.kill(pid, signal.SIGCONT)
 	elif state == "open" or state == "Open": # Set to open state (override and send the singal to open)
 		os.kill(pid, signal.SIGUSR2) # Send the open signal
-		if wait_time is not type(None): # Check to make sure there's a value for wait_time
+		if wait_time > 0: # Check to make sure there's a value for wait_time
 			time.sleep(wait_time) # Wait then resume auto state
 			os.kill(pid, signal.SIGCONT)
 	else:
