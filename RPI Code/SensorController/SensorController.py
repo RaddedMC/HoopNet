@@ -3,6 +3,7 @@
 # Programmed by JamesN / Radded
 # Co-designed with JarrettB
 
+from curses import ACS_GEQUAL
 from Sensor import Sensor
 
 class SensorController:
@@ -36,3 +37,22 @@ class SensorController:
             data.append(sensor.get_sensor_data())
         
         return data
+
+    def read_average(self):
+        """ Reads average data values from sensors
+            Returns in the form of:
+            [ Average humidity, Average temp ]
+
+            See read_all() for more info.
+        """
+        data = self.read_all()
+        avgtemp = 0
+        avghumid = 0
+        for sensor_data in data:
+            avghumid += sensor_data[0]
+            avgtemp += sensor_data[1]
+
+        avghumid/=len(data)
+        avgtemp/=len(data)
+
+        return [avghumid, avgtemp]
