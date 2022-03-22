@@ -3,7 +3,6 @@
 # Programmed by JamesN / Radded
 # Co-designed with JarrettB
 
-from curses import ACS_GEQUAL
 from Sensor import Sensor
 
 class SensorController:
