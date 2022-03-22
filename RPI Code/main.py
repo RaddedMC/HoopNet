@@ -6,56 +6,100 @@
 # IMPORTS
 from SensorController.SensorController import SensorController
 from SwitchController.SwitchController import SwitchController
-import signal
+import signal, time
 
 # THRESHOLD constants, could be useful later
 class thresholds:
-    THRESHOLD_TEMP = "TEMP"
-    THRESHOLD_HUMIDITY = "HUMI"
+    THRESHOLD_TEMP = 1
+    THRESHOLD_HUMIDITY = 0
 
 # THRESHOLDS, to be moved to a file later
 threshold = 10 # number
 threshold_type = thresholds.THRESHOLD_TEMP
 
 # OUTPUTS, to be moved to a file later
-sensor_pins = [1, 2, 3, 4] # TODO: make these a config file
-motor_pins = [[5, 6, 7], [8, 9, 10]]
-plug_ips = ["192.168.1.142", "192.168.1.100"]
+sensor_pins = [11, 13, 15, 19] # TODO: make these a config file
+motor_pins = [[33, 31, 29], [32, 36, 38]] ### PINOUTS MATCH Yassine's PCB ###
+plug_ips = ["172.20.10.7"] # Matches James' kasa plug paired to phone
 
 # GLOBALS for I/O
 sensor_controller = None
 switch_controller = None
 
+# OTHER important globals
+door_lifted = False
+wait_time = 5 # Seconds
+break_loop = False
 
 # MAIN LOOP
 def main():
-    while True:
+    while not break_loop:
         # Read sensor
-        sensor_data = sensor_controller.
+        sensor_average = sensor_controller.read_average()
+        
         # Check thresholds
-        # If out of threshold, open door!
-        # Sleep
+
+        # threshold_test( 
+        #   Average temperature or humidity. thresholds.THRESHOLD_HUMIDITY cooresponds to zero, the index of the average humidity value and vice-versa for thresholds.THRESHOLD_TEMPERATURE,
+        #   Threshold: pre-defined by user
+        #   Larger: This will be false if the doors are lifted, as when the doors are lifted the value must be above threshold.
+        # )
+
+        if threshold_test(sensor_average[threshold_type], threshold, not door_lifted):
+            # Change state of door
+            door_lifted = not door_lifted
+            switch_controller.set_state(door_lifted)
+        
+        time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle
+
+# THRESHOLD TEST
+def threshold_test(value_to_check, threshold, larger):
+    if larger:
+        return value_to_check >= threshold
+    else:
+        return value_to_check <= threshold
 
 # SETUP
 def setup():
     """ Ran when the daemon starts for the first time -- creates objects and resets everything
     """
+    global sensor_controller
     sensor_controller = SensorController(sensor_pins)
+
+    global switch_controller
     switch_controller = SwitchController(motor_pins, plug_ips)
 
+# SPLASH SCREEN
+def splash_screen():
+    print("""
+         __  __                  _   __     __ 
+        / / / /___  ____  ____  / | / /__  / /_          Western University ES1050 W22 T24Hoop
+       / /_/ / __ \/ __ \/ __ \/  |/ / _ \/ __/          Jarrett, Yassine, James, Damian, Ethan, Atrin
+      / __  / /_/ / /_/ / /_/ / /|  /  __/ /_            
+     /_/ /_/\____/\____/ .___/_/ |_/\___/\__/            Developed for Urban Roots London
+                      /_/                                HoopNet daemon for Pi
+    """)
+    import time
+    time.sleep(0.33)
 
 # SIGNAL HANDLERS
 def handle_signal_stop_high():
-    pass
+    global switch_controller
+    switch_controller.set_state(True)
 
 def handle_signal_stop_low():
-    pass
+    global switch_controller
+    switch_controller.set_state(False)
 
 def handle_signal_return():
-    pass
+    main() #TODO: this might create a stack overflow over time ,, we should test
 
 # PRIMARY SIGNAL HANDLER
 def signal_handler(sig, frame):
+
+    global break_loop
+    break_loop = True
+
     if sig == signal.SIGUSR1:
         handle_signal_stop_low()
 
@@ -65,6 +109,15 @@ def signal_handler(sig, frame):
     if sig == signal.SIGCONT:
         handle_signal_return()
 
-if __name__ == main():
-    setup()
-    main()
+    global break_loop
+    break_loop = False
+
+
+# RUN AT STARTUP!
+splash_screen()
+
+# Register signals -- main() will temporarily stop when one of these signals is recieved.
+for signaltype in [signal.SIGUSR1, signal.SIGUSR2, signal.SIGCONT]:
+    signal.signal(signaltype, signal_handler)
+setup()
+main()
