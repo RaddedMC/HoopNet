@@ -46,7 +46,7 @@ class DoorMotor:
         GPIO.setmode(GPIO.BOARD)
         self.__pins__ = pins
         for pin in pins:
-            GPIO.setup(pin, GPIO.output)
+            GPIO.setup(pin, GPIO.OUT)
         self.__pwm_enable__ = GPIO.PWM(pins[0], 1) # PWN(Pin, Frequency (default 1))
 
         # Lower door on creation to ensure stored state matches actual state

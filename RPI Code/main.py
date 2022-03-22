@@ -39,8 +39,12 @@ break_loop = False
 # MAIN LOOP
 def main():
     while not break_loop:
+        
+        print("AUTO MODE")
+
         # Read sensor
         sensor_average = sensor_controller.read_average()
+        print("Current Humidity: " + str(sensor_average[0] + "%, " + "Current temperature: " + str(sensor_average[1])))
         
         # Check thresholds
 
@@ -51,8 +55,16 @@ def main():
         # )
 
         if threshold_test(sensor_average[threshold_type], threshold, not door_lifted):
+            print("Conditions failed threshold test!")
+
             # Change state of door
             door_lifted = not door_lifted
+
+            if (door_lifted): 
+                print("Opening doors!")
+            else: 
+                print("Lowering doors!")
+            
             switch_controller.set_state(door_lifted)
         
         time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle
@@ -123,5 +135,8 @@ splash_screen()
 # Register signals -- main() will temporarily stop when one of these signals is recieved.
 for signaltype in [signal.SIGUSR1, signal.SIGUSR2, signal.SIGCONT]:
     signal.signal(signaltype, signal_handler)
+
+print("Setting up...")
 setup()
+print("Setup complete!")
 main()
