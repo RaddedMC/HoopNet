@@ -9,8 +9,8 @@ import sys
 # lol import errors
 sys.path.append('SensorController')
 sys.path.append('SwitchController')
-from SensorController.SensorController import SensorController
-from SwitchController.SwitchController import SwitchController
+from SensorController import SensorController
+from SwitchController import SwitchController
 import signal, time
 
 # THRESHOLD constants, could be useful later
