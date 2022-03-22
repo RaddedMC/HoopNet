@@ -40,10 +40,6 @@ class SwitchController:
         for plug_ip in plug_ips:
             self.__switches__.append(KasaSwitch(plug_ip))
 
-    def turnOn(self):
+    def set_state(self, state):
         for switch in self.__switches__:
-            switch.set_state(True)
-
-    def turnOff(self):
-        for switch in self.__switches__:
-            switch.set_state(False)
+            switch.set_state(state)
