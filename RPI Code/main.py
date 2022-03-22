@@ -109,7 +109,6 @@ def signal_handler(sig, frame):
     if sig == signal.SIGCONT:
         handle_signal_return()
 
-    global break_loop
     break_loop = False
 
 
