@@ -4,6 +4,11 @@
 # Co-designed with JarrettB
 
 # IMPORTS
+import sys
+
+# lol import errors
+sys.path.append('SensorController')
+sys.path.append('SwitchController')
 from SensorController.SensorController import SensorController
 from SwitchController.SwitchController import SwitchController
 import signal, time
