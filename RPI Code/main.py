@@ -24,7 +24,7 @@ threshold = 30 # number
 threshold_type = thresholds.THRESHOLD_HUMIDITY
 
 # OUTPUTS, to be moved to a file later
-sensor_pins = [17, 27, 22, 10] # TODO: make these a config file
+sensor_pins = [17, 27] # TODO: make these a config file
 # 'GPIO' numbers in pinout.xyz
 
 motor_pins = [[33, 31, 29], [32, 36, 38]] ### PINOUTS MATCH Yassine's PCB ###
@@ -115,10 +115,12 @@ def splash_screen():
 # SIGNAL HANDLERS
 def handle_signal_stop_high():
     global switch_controller
+    print("OVERRIDE: Lift!")
     switch_controller.set_state(True)
 
 def handle_signal_stop_low():
     global switch_controller
+    print("OVERRIDE: Lower!")
     switch_controller.set_state(False)
 
 def handle_signal_return():
@@ -147,6 +149,7 @@ splash_screen()
 
 # Register signals -- main() will temporarily stop when one of these signals is recieved.
 for signaltype in [signal.SIGUSR1, signal.SIGUSR2, signal.SIGCONT]:
+    print("Recieved a signal!")
     signal.signal(signaltype, signal_handler)
 
 print("Setting up...")
