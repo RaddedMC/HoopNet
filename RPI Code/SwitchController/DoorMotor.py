@@ -24,7 +24,7 @@ class DoorMotor:
     __proc__ = None
 
     # CONSTANTS
-    duty_cycle = 100 # 0 - 100 (No (low) to high speed)
+    duty_cycle = 20 # 0 - 100 (No (low) to high speed)
     motor_lift_lower_time = 5 # seconds
 
     # Pin things

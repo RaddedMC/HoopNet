@@ -47,8 +47,9 @@ def main():
         print("AUTO MODE")
 
         # Read sensor
+        print("Reading sensors...")
         sensor_average = sensor_controller.read_average()
-        print("Current Humidity: " + str(sensor_average[0] + "%, " + "Current temperature: " + str(sensor_average[1])))
+        print("Current Humidity: " + str(sensor_average[0]) + "%, " + "Current temperature: " + str(sensor_average[1]))
         
         # Check thresholds
 
