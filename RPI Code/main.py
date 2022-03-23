@@ -4,6 +4,7 @@
 # Co-designed with JarrettB
 
 # IMPORTS
+from multiprocessing.connection import wait
 import sys
 
 # lol import errors
@@ -42,11 +43,14 @@ break_loop = False
 
 # MAIN LOOP
 def main():
-    while not break_loop:
+    # we hate globals!
+    global sensor_controller
+    global switch_controller
+    global door_lifted
+    global wait_time
+    global break_loop
 
-        # we hate globals!
-        global sensor_controller
-        global switch_controller
+    while not break_loop:
 
         print("AUTO MODE")
 
