@@ -19,7 +19,7 @@ class Display:
     backlight_state = True
     
     def __init__(self):
-        self.lcd = i2c.CharLCD(self.i2c_expander, self.address, self.port, self.charmap, self.cols, self.rows)
+        self.lcd = i2c.CharLCD(self.i2c_expander, self.address, port=self.port, charmap=self.charmap, cols=self.cols, rows=self.rows)
         self.lcd.backlight_enabled = self.backlight_state
 
     def __overflow_warn__(self):
