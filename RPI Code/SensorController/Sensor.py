@@ -20,5 +20,5 @@ class Sensor:
         self.sensor = sensor_type
 
     def get_sensor_data(self):
-        """Returns humity, tempature"""
+        """Returns humidity, temperature"""
         return Adafruit_DHT.read_retry(self.sensor, self.sensor_pin)
