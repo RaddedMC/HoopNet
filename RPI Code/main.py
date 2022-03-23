@@ -19,8 +19,8 @@ class thresholds:
     THRESHOLD_HUMIDITY = 0
 
 # THRESHOLDS, to be moved to a file later
-threshold = 10 # number
-threshold_type = thresholds.THRESHOLD_TEMP
+threshold = 30 # number
+threshold_type = thresholds.THRESHOLD_HUMIDITY
 
 # OUTPUTS, to be moved to a file later
 sensor_pins = [17, 27, 22, 10] # TODO: make these a config file
