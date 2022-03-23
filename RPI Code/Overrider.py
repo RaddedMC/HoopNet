@@ -6,7 +6,7 @@
 import signal, os, argparse, time, subprocess
 
 # The name of the python script to send signals to
-script_name = "TestOverrider.py"
+script_name = "main.py"
 
 def main():
 	# Set up the command line arguments
