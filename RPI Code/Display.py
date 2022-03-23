@@ -17,6 +17,7 @@ class Display:
     lcd = None
     warned = False
     backlight_state = True
+    __proc__ = None
     
     def __init__(self):
         self.lcd = i2c.CharLCD(self.i2c_expander, self.address, port=self.port, charmap=self.charmap, cols=self.cols, rows=self.rows)
@@ -27,6 +28,7 @@ class Display:
         print("Warning: You attempted to print more than " + str(self.cols) + " on one line. This extra text is cut off, ")
 
     def display(self, string):
+        self.lcd.clear()
         charcount = 0
         for character in string:
             if character == "\n":
