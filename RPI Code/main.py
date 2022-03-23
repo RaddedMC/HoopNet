@@ -24,7 +24,11 @@ threshold_type = thresholds.THRESHOLD_TEMP
 
 # OUTPUTS, to be moved to a file later
 sensor_pins = [17, 27, 22, 10] # TODO: make these a config file
-motor_pins = [[13, 6, 5], [12, 16, 20]] ### PINOUTS MATCH Yassine's PCB ###
+# 'GPIO' numbers in pinout.xyz
+
+motor_pins = [[33, 31, 29], [32, 36, 38]] ### PINOUTS MATCH Yassine's PCB ###
+# Hardware numbers in pinout.xyz
+
 plug_ips = ["172.20.10.7"] # Matches James' kasa plug paired to phone
 
 # GLOBALS for I/O
