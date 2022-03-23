@@ -49,38 +49,38 @@ def main():
     global door_lifted
     global wait_time
     global break_loop
+    while True:
+        while not break_loop:
 
-    while not break_loop:
+            print("AUTO MODE")
 
-        print("AUTO MODE")
-
-        # Read sensor
-        print("Reading sensors...")
-        sensor_average = sensor_controller.read_average()
-        print("Current Humidity: " + str(sensor_average[0]) + "%, " + "Current temperature: " + str(sensor_average[1]))
-        
-        # Check thresholds
-
-        # threshold_test( 
-        #   Average temperature or humidity. thresholds.THRESHOLD_HUMIDITY cooresponds to zero, the index of the average humidity value and vice-versa for thresholds.THRESHOLD_TEMPERATURE,
-        #   Threshold: pre-defined by user
-        #   Larger: This will be false if the doors are lifted, as when the doors are lifted the value must be above threshold.
-        # )
-
-        if threshold_test(sensor_average[threshold_type], threshold, not door_lifted):
-            print("Conditions failed threshold test!")
-
-            # Change state of door
-            door_lifted = not door_lifted
-
-            if (door_lifted): 
-                print("Opening doors!")
-            else: 
-                print("Lowering doors!")
+            # Read sensor
+            print("Reading sensors...")
+            sensor_average = sensor_controller.read_average()
+            print("Current Humidity: " + str(sensor_average[0]) + "%, " + "Current temperature: " + str(sensor_average[1]))
             
-            switch_controller.set_state(door_lifted)
-        
-        time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle
+            # Check thresholds
+
+            # threshold_test( 
+            #   Average temperature or humidity. thresholds.THRESHOLD_HUMIDITY cooresponds to zero, the index of the average humidity value and vice-versa for thresholds.THRESHOLD_TEMPERATURE,
+            #   Threshold: pre-defined by user
+            #   Larger: This will be false if the doors are lifted, as when the doors are lifted the value must be above threshold.
+            # )
+
+            if threshold_test(sensor_average[threshold_type], threshold, not door_lifted):
+                print("Conditions failed threshold test!")
+
+                # Change state of door
+                door_lifted = not door_lifted
+
+                if (door_lifted): 
+                    print("Opening doors!")
+                else: 
+                    print("Lowering doors!")
+                
+                switch_controller.set_state(door_lifted)
+            
+            time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle`
 
 # THRESHOLD TEST
 def threshold_test(value_to_check, threshold, larger):
@@ -124,11 +124,11 @@ def handle_signal_stop_low():
     switch_controller.set_state(False)
 
 def handle_signal_return():
+    global break_loop
     break_loop = False
-    main() #TODO: this might create a stack overflow over time ,, we should test
 
 # PRIMARY SIGNAL HANDLER
-def signal_handler(sig, frame):
+def signal_handler(sig):
 
     global break_loop
     break_loop = True
