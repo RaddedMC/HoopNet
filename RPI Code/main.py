@@ -43,7 +43,11 @@ break_loop = False
 # MAIN LOOP
 def main():
     while not break_loop:
-        
+
+        # we hate globals!
+        global sensor_controller
+        global switch_controller
+
         print("AUTO MODE")
 
         # Read sensor
