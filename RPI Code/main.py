@@ -124,6 +124,7 @@ def handle_signal_stop_low():
     switch_controller.set_state(False)
 
 def handle_signal_return():
+    break_loop = False
     main() #TODO: this might create a stack overflow over time ,, we should test
 
 # PRIMARY SIGNAL HANDLER
@@ -140,8 +141,6 @@ def signal_handler(sig, frame):
 
     if sig == signal.SIGCONT:
         handle_signal_return()
-
-    break_loop = False
 
 
 # RUN AT STARTUP!
