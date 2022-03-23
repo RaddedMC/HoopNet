@@ -128,7 +128,7 @@ def handle_signal_return():
     break_loop = False
 
 # PRIMARY SIGNAL HANDLER
-def signal_handler(sig):
+def signal_handler(sig, frame):
 
     global break_loop
     break_loop = True
