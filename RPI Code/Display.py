@@ -25,15 +25,14 @@ class Display:
 
     def __overflow_warn__(self):
         self.warned = True
-        print("Warning: You attempted to print more than " + str(self.cols) + " on one line. This extra text is cut off, ")
+        print("Warning: You attempted to print more than " + str(self.cols) + " on one line. This extra text is cut off.")
 
     def display(self, string):
         self.lcd.clear()
         charcount = 0
         for character in string:
             if character == "\n":
-                self.lcd.crlf()
-                charcount = 0
+                self.lcd.write_string(" "*(self.cols-charcount))
             charcount += 1
             if (charcount < self.cols):
                 self.lcd.write_string(character)
