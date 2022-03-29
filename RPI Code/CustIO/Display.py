@@ -40,7 +40,7 @@ class Display:
 
             # If the character is a backslask, our escape character of choice...
             if character == "\\":
-                if linecount >= self.lcd.rows:
+                if linecount >= self.rows:
                     self.lcd.write_string(" "*(self.cols-charcount))
                     linecount += 1
                 else:
