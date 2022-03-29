@@ -7,6 +7,7 @@
 
 import asyncio
 from kasa import Discover
+import kasa
 
 class KasaSwitch:
     """Represents a TP-Link Smart Plug.
@@ -27,7 +28,10 @@ class KasaSwitch:
         
         # Connects to the plug early-on to verify if the IP given is correct
         # This will error if the plug isn't available!
-        self.plug = asyncio.run(Discover.discover_single(self.ip_addr))
+        try:
+            self.plug = asyncio.run(Discover.discover_single(self.ip_addr))
+        except kasa.exceptions.SmartDeviceException:
+            print("Unable to connect to the plug at " + self.plugip + ", continuing...")
         
 
     def set_state(self, state):
