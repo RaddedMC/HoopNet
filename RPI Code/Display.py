@@ -30,9 +30,11 @@ class Display:
     def display(self, string):
         self.lcd.clear()
         charcount = 0
+        linecount = 1
         for character in string:
             if character == "\n":
                 self.lcd.write_string(" "*(self.cols-charcount))
+                
             charcount += 1
             if (charcount < self.cols):
                 self.lcd.write_string(character)
