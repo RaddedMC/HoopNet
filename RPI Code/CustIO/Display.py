@@ -31,7 +31,7 @@ class Display:
         # Clear the screen
         self.lcd.clear()
 
-        if len(string > self.cols):
+        if len(string) > self.cols:
             self.lcd.write_string(string[0:9])
             self.lcd.cursor_pos = (1,0)
             self.lcd.write_string(string[10:])
