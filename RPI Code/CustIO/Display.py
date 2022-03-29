@@ -40,7 +40,7 @@ class Display:
 
             # If the character is a backslask, our escape character of choice...
             if character == "\\":
-                if linecount >= self.rows:
+                if linecount > self.rows:
                     self.lcd.cursor_pos = (linecount, 0)
                     linecount += 1
                     charcount = 0
