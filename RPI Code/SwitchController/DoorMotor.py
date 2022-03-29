@@ -17,7 +17,6 @@ class DoorMotor:
 
     Use get_moving() to check if the door is moving, if you wish to wait for the door to stop moving before you ask it to do something else.
     """
-    # TODO: Fill object with code so that it can actually control the lift door!
 
     # OOP states
     is_lifted = False
