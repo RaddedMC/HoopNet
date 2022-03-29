@@ -8,6 +8,12 @@ import signal, os, argparse, time, subprocess
 # The name of the python script to send signals to
 script_name = "main.py"
 
+"""This script is used to send override comannds using the command line
+Used to send override commands.
+Enter a state - Enter either 'open' to raise the side, 'close' to lower the side, 'auto' to resume automatic control.
+Optional enter a time - Enter an integer for how long in seconds to override. Only used with 'open' and 'close'.
+"""
+
 def main():
 	# Set up the command line arguments
 	parser = argparse.ArgumentParser(description="Used to send override commands.")
