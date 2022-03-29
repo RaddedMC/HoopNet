@@ -25,7 +25,7 @@ class thresholds:
     THRESHOLD_HUMIDITY = 0
 
 # THRESHOLDS, to be moved to a file later
-threshold = 30 # number
+threshold = 17 # number
 threshold_type = thresholds.THRESHOLD_HUMIDITY
 
 # OUTPUTS, to be moved to a file later
