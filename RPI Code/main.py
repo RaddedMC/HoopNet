@@ -80,7 +80,7 @@ def main():
                 
                 switch_controller.set_state(door_lifted)
             
-            time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle`
+            time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle.
 
 # THRESHOLD TEST
 def threshold_test(value_to_check, threshold, larger):
