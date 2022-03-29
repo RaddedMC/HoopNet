@@ -24,9 +24,11 @@ threshold = 30 # number
 threshold_type = thresholds.THRESHOLD_HUMIDITY
 
 # OUTPUTS, to be moved to a file later
+#              11, 13 hardware
 sensor_pins = [17, 27] # TODO: make these a config file
 # 'GPIO' numbers in pinout.xyz
 
+#              ENA, IN1, IN2, ENB, IN3, IN4
 motor_pins = [[33, 31, 29], [32, 36, 38]] ### PINOUTS MATCH Yassine's PCB ###
 # Hardware numbers in pinout.xyz
 
@@ -80,7 +82,7 @@ def main():
                 
                 switch_controller.set_state(door_lifted)
             
-            time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle`
+            time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle.
 
 # THRESHOLD TEST
 def threshold_test(value_to_check, threshold, larger):

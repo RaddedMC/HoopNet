@@ -17,7 +17,6 @@ class DoorMotor:
 
     Use get_moving() to check if the door is moving, if you wish to wait for the door to stop moving before you ask it to do something else.
     """
-    # TODO: Fill object with code so that it can actually control the lift door!
 
     # OOP states
     is_lifted = False
@@ -59,11 +58,11 @@ class DoorMotor:
         """Asynchronously lifts or lowers the side door. Use this method to control the doors!
         """
 
-        # If user wants to lift and it isn't lifted already,
+        # If user wants to lift and it isn't lifted already.
         if state and not self.is_lifted: 
             self.__run_proc_from_method_(self.__lift__)
 
-        # If user wants to lower and it isn't lowered already,
+        # If user wants to lower and it isn't lowered already.
         elif not state and self.is_lifted: 
             self.__run_proc_from_method_(self.__lower__)
         
@@ -105,7 +104,7 @@ class DoorMotor:
         """Don't use this! It is just a helper method for DoorMotor.set_state()"""
         print("Started lowering a lift door!")
 
-        # Reverse direction for Motor A
+        # Reverse direction for Motor
         GPIO.output(self.__pins__[1], GPIO.HIGH)
         GPIO.output(self.__pins__[2], GPIO.LOW)
         self.__pwm_enable__.start(self.duty_cycle)
@@ -117,7 +116,7 @@ class DoorMotor:
         # The time it takes for the motor to stop
         time.sleep(self.motor_lift_lower_time)
 
-         # Stop Motor
+        # Stop Motor
         GPIO.output(self.__pins__[1], GPIO.LOW)
         GPIO.output(self.__pins__[2], GPIO.LOW)
         self.__pwm_enable__.stop()
