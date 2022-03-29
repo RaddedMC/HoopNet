@@ -47,6 +47,7 @@ switch_controller = None
 door_lifted = False
 wait_time = 5 # Seconds
 break_loop = False
+display = None
 
 # MAIN LOOP
 def main():
@@ -66,7 +67,7 @@ def main():
             sensor_average = sensor_controller.read_average()
 
             # TODO: Add text to say if overriden??
-            Display.display("Humidity: {0:0.1f}%\nTemperature: {0:0.1f}C".format(str(sensor_average[0]), str(sensor_average[1])))
+            display.display("Humidity: {0:0.1f}%\nTemperature: {0:0.1f}C".format(str(sensor_average[0]), str(sensor_average[1])))
             print("Current Humidity: {0:0.1f}%, Current Temperature: {0:0.1f}ºC".format(str(sensor_average[0]), str(sensor_average[1])))
             
             # Check thresholds
@@ -108,6 +109,9 @@ def setup():
 
     global switch_controller
     switch_controller = SwitchController(motor_pins, plug_ips)
+
+    global display
+    display = Display()
 
 # SPLASH SCREEN
 def splash_screen():
