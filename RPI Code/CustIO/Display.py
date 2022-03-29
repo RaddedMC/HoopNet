@@ -65,7 +65,7 @@ class Display:
             sleep(data[0])
 
     def flash_backlight(self, delay, flashes):
-        self.__run_proc_from_method_(self.__flash_backlight_async, [delay, flashes])
+        self.__run_proc_from_method_(self.__flash_backlight_async, (delay, flashes))
 
     def __run_proc_from_method_(self, method, data):
         """Don't use this! This is used to handle multiprocessing."""
