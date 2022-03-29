@@ -111,7 +111,7 @@ def setup():
     switch_controller = SwitchController(motor_pins, plug_ips)
 
     global display
-    display = Display()
+    display = Display.Display()
 
 # SPLASH SCREEN
 def splash_screen():
