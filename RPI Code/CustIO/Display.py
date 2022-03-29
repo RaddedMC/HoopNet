@@ -41,8 +41,9 @@ class Display:
             # If the character is a backslask, our escape character of choice...
             if character == "\\":
                 if linecount >= self.rows:
-                    self.lcd.write_string(" "*(self.cols-charcount))
+                    self.lcd.cursor_pos = (linecount, 0)
                     linecount += 1
+                    charcount = 0
                 else:
                     self.__overflow_warn__()
                     break
