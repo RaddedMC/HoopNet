@@ -25,16 +25,27 @@ class Display:
 
     def __overflow_warn__(self):
         self.warned = True
-        print("Warning: You attempted to print more than " + str(self.cols) + " on one line. This extra text is cut off.")
+        print("Warning: You attempted to print more than " + str(self.cols) + " characters on one line. This extra text is cut off.")
 
     def display(self, string):
+        # Clear the screen
         self.lcd.clear()
+
+        # Useful locals
         charcount = 0
         linecount = 1
+
+        # For each character in the string to be printed...
         for character in string:
-            if character == "\n":
-                self.lcd.write_string(" "*(self.cols-charcount))
-                
+
+            # If the character is a backslask, our escape character of choice...
+            if character == "\\":
+                if linecount >= self.lcd.rows:
+                    self.lcd.write_string(" "*(self.cols-charcount))
+                    linecount += 1
+                else:
+                    self.__overflow_warn__()
+                    break
             charcount += 1
             if (charcount < self.cols):
                 self.lcd.write_string(character)
