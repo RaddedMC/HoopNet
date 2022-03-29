@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # ES1050 T24HoopNet
 # main.py
 # Programmed by JamesN / Radded
@@ -10,8 +13,10 @@ import sys
 # lol import errors
 sys.path.append('SensorController')
 sys.path.append('SwitchController')
+sys.path.append('CustIO')
 from SensorController import SensorController
 from SwitchController import SwitchController
+from CustIO import Display
 import signal, time
 
 # THRESHOLD constants, could be useful later
@@ -59,7 +64,10 @@ def main():
             # Read sensor
             print("Reading sensors...")
             sensor_average = sensor_controller.read_average()
-            print("Current Humidity: " + str(sensor_average[0]) + "%, " + "Current temperature: " + str(sensor_average[1]) + " degrees F")
+
+            # TODO: Add text to say if overriden??
+            Display.display("Humidity: {0:0.1f}%\nTemperature: {0:0.1f}C".format(str(sensor_average[0]), str(sensor_average[1])))
+            print("Current Humidity: {0:0.1f}%, Current Temperature: {0:0.1f}ºC".format(str(sensor_average[0]), str(sensor_average[1])))
             
             # Check thresholds
 
