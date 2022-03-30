@@ -156,7 +156,7 @@ def handle_exit():
         except:
             pass
     display.display("hoopnet crashed lol")
-    exit()
+    exit(1)
 
 # PRIMARY SIGNAL HANDLER
 #TODO --- sigint
