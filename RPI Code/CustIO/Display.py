@@ -31,10 +31,13 @@ class Display:
         # Clear the screen
         self.lcd.clear()
 
+        # TODO: make this work with other types of displays..?
         if len(string) > self.cols:
             self.lcd.write_string(string[0:9])
             self.lcd.cursor_pos = (1,0)
             self.lcd.write_string(string[10:])
+        else:
+            self.lcd.write_string(string)
 
         # Useful locals
         # charcount = 0
