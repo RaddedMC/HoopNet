@@ -68,7 +68,7 @@ def main():
 
             # TODO: Add text to say if overriden??
             #                1234567890123456
-            display.display("Humidity: {0:0.1f}% Temp: {0:0.1f} C")
+            display.display("Humidity: {0:0.1f}% Temp: {0:0.1f} C".format(sensor_average[0], sensor_average[1]))
             print("Current Humidity: {0:0.1f}%, Current Temperature: {0:0.1f}ºC".format(sensor_average[0], sensor_average[1]))
             
             # Check thresholds

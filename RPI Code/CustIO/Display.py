@@ -34,15 +34,14 @@ class Display:
         import math
         print("Range " + str(0) + " to " + str(math.ceil(len(string)/self.cols)))
         for i in range(0, math.ceil(len(string)/self.cols)):
-            print("Printing characters ["  + str((i*self.cols)) + " : " + str((i+1)*self.cols) + " ] ")
+            #print("Printing characters ["  + str((i*self.cols)) + " : " + str((i+1)*self.cols) + " ] ")
             self.lcd.write_string(string[(i*self.cols):((i+1)*self.cols)])
-            print(string[(i*self.cols):((i+i)*self.cols)])
+            #print(string[(i*self.cols):((i+i)*self.cols)])
             if (i+1) < self.rows:
                 self.lcd.cursor_pos = (i+1,0)
-                print(self.lcd.cursor_pos)
+                #print(self.lcd.cursor_pos)
             else:
                 break
-        # old, non-working version of this code is on a previous commit
 
     def set_backlight_state(self, state):
         self.backlight_state = state
@@ -54,6 +53,7 @@ class Display:
             self.lcd.backlight_enabled = not self.lcd.backlight_enabled
             sleep(data[0])
 
+    # TODO: fix
     def flash_backlight(self, delay, flashes):
         self.__run_proc_from_method_(self.__flash_backlight_async, (delay, flashes))
 
