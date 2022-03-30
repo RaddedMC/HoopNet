@@ -34,7 +34,10 @@ class Display:
         import math
         for i in range(0, math.ceil(len(string)/self.rows)):
             self.lcd.write_string(string[0:(i*self.rows)-1])
-            self.lcd.cursor_pos = (i+1,0)
+            try:
+                self.lcd.cursor_pos = (i+1,0)
+            except ValueError:
+                break
             self.lcd.write_string(string[i*self.rows:])
         # old, non-working version of this code is on a previous commit
 
