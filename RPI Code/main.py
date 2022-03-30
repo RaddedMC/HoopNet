@@ -70,7 +70,7 @@ def main():
 
             # TODO: Add text to say if overriden??
             #                1234567890123456
-            display.display("Humidity:  {0:0.1f}%Temp:     {1:0.1f}ºC".format(sensor_average[0], sensor_average[1]))
+            display.display("Humidity:  {0:0.1f}%Temp:     {1:0.1f} C".format(sensor_average[0], sensor_average[1]))
             print("Current Humidity: {0:0.1f}%, Current Temperature: {1:0.1f}ºC".format(sensor_average[0], sensor_average[1]))
 
             
@@ -135,11 +135,13 @@ def splash_screen():
 def handle_signal_stop_high():
     global switch_controller
     print("OVERRIDE: Lift!")
+    global display
+    display.display("Override: OPEN   HoopNet")
     switch_controller.set_state(True)
 
 def handle_signal_stop_low():
     global switch_controller
-    print("OVERRIDE: Lower!")
+    display.display("Override: CLOSED HoopNet")
     switch_controller.set_state(False)
 
 def handle_signal_return():
