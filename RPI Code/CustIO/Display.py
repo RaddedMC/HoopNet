@@ -8,7 +8,7 @@ class Display:
     """
 
     lcdmode = 'i2c'
-    cols = 20
+    cols = 16
     rows = 2
     charmap = 'A00'
     i2c_expander = "PCF8574"
@@ -31,10 +31,11 @@ class Display:
         # Clear the screen
         self.lcd.clear()
 
-        # TODO: make this work with other types of displays..?
-        self.lcd.write_string(string[0:19])
-        self.lcd.cursor_pos = (1,0)
-        self.lcd.write_string(string[20:])
+        import math
+        for i in range(0, math.ceil(len(string)/self.rows)):
+            self.lcd.write_string(string[0:(i*self.rows)-1])
+            self.lcd.cursor_pos = (i+1,0)
+            self.lcd.write_string(string[i*self.rows:])
         # old, non-working version of this code is on a previous commit
 
     def set_backlight_state(self, state):
