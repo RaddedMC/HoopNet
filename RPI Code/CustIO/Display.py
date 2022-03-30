@@ -32,37 +32,10 @@ class Display:
         self.lcd.clear()
 
         # TODO: make this work with other types of displays..?
-        if len(string) > self.cols:
-            self.lcd.write_string(string[0:9])
-            self.lcd.cursor_pos = (1,0)
-            self.lcd.write_string(string[10:])
-        else:
-            self.lcd.write_string(string)
-
-        # Useful locals
-        # charcount = 0
-        # linecount = 1
-
-
-
-        # # For each character in the string to be printed...
-        # for character in string:
-
-        #     # If the character is a backslask, our escape character of choice...
-        #     if character == "\\":
-        #         if linecount > self.rows:
-        #             self.lcd.cursor_pos = (linecount, 0)
-        #             linecount += 1
-        #             charcount = 0
-        #         else:
-        #             self.__overflow_warn__()
-        #             break
-        #     charcount += 1
-        #     if (charcount < self.cols):
-        #         self.lcd.write_string(character)
-        #     else:
-        #         self.__overflow_warn__()
-        # self.warned = False
+        self.lcd.write_string(string[0:19])
+        self.lcd.cursor_pos = (1,0)
+        self.lcd.write_string(string[20:])
+        # old, non-working version of this code is on a previous commit
 
     def set_backlight_state(self, state):
         self.backlight_state = state
