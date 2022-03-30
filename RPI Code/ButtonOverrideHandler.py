@@ -3,8 +3,9 @@
 # Programmed by JamesN / Radded
 
 # Imports
-from gpiozero import button
+from gpiozero import Button
 import os
+from signal import pause
 
 # Helper class
 class States:
@@ -37,3 +38,8 @@ def on_press():
 
 # Makes sure command is ran in right place
 os.chdir(os.path.dirname(os.path.realpath(__file__)))
+
+# Set up pin profile
+button = Button(pin)
+button.when_pressed = on_press()
+pause()
