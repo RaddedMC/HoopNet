@@ -32,10 +32,14 @@ class Display:
         self.lcd.clear()
 
         import math
+        print("Range " + str(0) + " to " + str(math.ceil(len(string)/self.cols)))
         for i in range(0, math.ceil(len(string)/self.cols)):
-            self.lcd.write_string(string[(i*self.cols)-1:((i+1)*self.cols)-1])
+            print("Printing characters ["  + str((i*self.cols)) + " : " + str((i+1)*self.cols) + " ] ")
+            self.lcd.write_string(string[(i*self.cols):((i+1)*self.cols)])
+            print(string[(i*self.cols):((i+i)*self.cols)])
             if (i+1) < self.rows:
                 self.lcd.cursor_pos = (i+1,0)
+                print(self.lcd.cursor_pos)
             else:
                 break
         # old, non-working version of this code is on a previous commit
