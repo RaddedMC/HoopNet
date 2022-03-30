@@ -173,7 +173,7 @@ def signal_handler(sig, frame):
     if sig == signal.SIGCONT:
         handle_signal_return()
 
-    if sig == signal.SIG_INT:
+    if sig == signal.SIGINT:
         handle_exit()
 
 
@@ -184,7 +184,7 @@ print("Setting up...")
 setup()
 
 # Register signals -- main() will temporarily stop when one of these signals is recieved.
-for signaltype in [signal.SIGUSR1, signal.SIGUSR2, signal.SIGCONT]:
+for signaltype in [signal.SIGUSR1, signal.SIGUSR2, signal.SIGCONT, signal.SIGINT]:
     print("Recieved a signal!")
     signal.signal(signaltype, signal_handler)
 
