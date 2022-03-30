@@ -32,13 +32,12 @@ class Display:
         self.lcd.clear()
 
         import math
-        for i in range(0, math.ceil(len(string)/self.rows)):
-            self.lcd.write_string(string[0:(i*self.rows)-1])
-            try:
+        for i in range(0, math.ceil(len(string)/self.cols)):
+            self.lcd.write_string(string[(i*self.cols)-1:((i+1)*self.cols)-1])
+            if (i+1) < self.rows:
                 self.lcd.cursor_pos = (i+1,0)
-            except ValueError:
+            else:
                 break
-            self.lcd.write_string(string[i*self.rows:])
         # old, non-working version of this code is on a previous commit
 
     def set_backlight_state(self, state):
