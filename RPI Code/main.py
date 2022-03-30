@@ -105,14 +105,15 @@ def threshold_test(value_to_check, threshold, larger):
 def setup():
     """ Ran when the daemon starts for the first time -- creates objects and resets everything
     """
+    global display
+    display = Display.Display()
+    display.display("HoopNet is starting up...")
+
     global sensor_controller
     sensor_controller = SensorController(sensor_pins)
 
     global switch_controller
     switch_controller = SwitchController(motor_pins, plug_ips)
-
-    global display
-    display = Display.Display()
 
 # SPLASH SCREEN
 def splash_screen():
@@ -161,12 +162,13 @@ def signal_handler(sig, frame):
 # RUN AT STARTUP!
 splash_screen()
 
+print("Setting up...")
+setup()
+
 # Register signals -- main() will temporarily stop when one of these signals is recieved.
 for signaltype in [signal.SIGUSR1, signal.SIGUSR2, signal.SIGCONT]:
     print("Recieved a signal!")
     signal.signal(signaltype, signal_handler)
 
-print("Setting up...")
-setup()
 print("Setup complete!")
 main()
