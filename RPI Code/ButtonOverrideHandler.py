@@ -20,6 +20,7 @@ pin = 4 ## GPIO PIN not hardware pin
 # Happens whenever the Pi Button is pressed
 def on_press():
     global state
+    print("Button pressed!")
 
     # If the state is 2, this will revert back
     if state == States.override_open:
@@ -28,12 +29,15 @@ def on_press():
         state+=1
 
     if state == States.auto:
+        print("Set to AUTO")
         os.system("python Overrider.py auto")
     elif state == States.override_closed:
         # DO OTHER THING
+        print("Set to CLOSE")
         os.system("python Overrider.py close")
     else:
         # DO FINAL THING
+        print("Set to OPEN")
         os.system("python Overrider.py open")
 
 # Makes sure command is ran in right place
@@ -41,5 +45,5 @@ os.chdir(os.path.dirname(os.path.realpath(__file__)))
 
 # Set up pin profile
 button = Button(pin)
-button.when_pressed = on_press()
+button.when_pressed = on_press
 pause()
