@@ -32,7 +32,7 @@ class Display:
         self.lcd.clear()
 
         import math
-        print("Range " + str(0) + " to " + str(math.ceil(len(string)/self.cols)))
+        #print("Range " + str(0) + " to " + str(math.ceil(len(string)/self.cols)))
         for i in range(0, math.ceil(len(string)/self.cols)):
             #print("Printing characters ["  + str((i*self.cols)) + " : " + str((i+1)*self.cols) + " ] ")
             self.lcd.write_string(string[(i*self.cols):((i+1)*self.cols)])
