@@ -148,6 +148,16 @@ def handle_signal_return():
     global break_loop
     break_loop = False
 
+def handle_exit():
+    global switch_controller
+    for device in switch_controller.__switches__:
+        try:
+            device.__stop_motors__()
+        except:
+            pass
+    display.display("hoopnet crashed lol")
+    exit()
+
 # PRIMARY SIGNAL HANDLER
 def signal_handler(sig, frame):
 
@@ -162,6 +172,9 @@ def signal_handler(sig, frame):
 
     if sig == signal.SIGCONT:
         handle_signal_return()
+
+    if sig == signal.SIG_INT:
+        handle_exit()
 
 
 # RUN AT STARTUP!
