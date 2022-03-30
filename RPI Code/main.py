@@ -159,6 +159,7 @@ def handle_exit():
     exit()
 
 # PRIMARY SIGNAL HANDLER
+#TODO --- sigint
 def signal_handler(sig, frame):
 
     global break_loop
