@@ -138,11 +138,15 @@ def handle_signal_stop_high():
     global display
     display.display("Override: OPEN   HoopNet")
     switch_controller.set_state(True)
+    global door_lifted
+    door_lifted = True
 
 def handle_signal_stop_low():
     global switch_controller
     display.display("Override: CLOSED HoopNet")
     switch_controller.set_state(False)
+    global door_lifted
+    door_lifted = False
 
 def handle_signal_return():
     global break_loop
