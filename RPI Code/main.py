@@ -92,7 +92,8 @@ def main():
                     print("Opening doors!")
                 else: 
                     print("Lowering doors!")
-                
+                # LIFT OR LOWER
+                display.flash_backlight(0.025, 100)
                 switch_controller.set_state(door_lifted)
             
             time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle.
@@ -111,6 +112,7 @@ def setup():
     global display
     display = Display.Display()
     display.display("HoopNet is      starting up...")
+    display.flash_backlight(0.1, 10)
 
     global sensor_controller
     sensor_controller = SensorController(sensor_pins)
@@ -137,13 +139,17 @@ def handle_signal_stop_high():
     print("OVERRIDE: Lift!")
     global display
     display.display("Override: OPEN   HoopNet")
+    # LIFT
     switch_controller.set_state(True)
+    display.flash_backlight(0.025, 100)
     global door_lifted
     door_lifted = True
 
 def handle_signal_stop_low():
     global switch_controller
     display.display("Override: CLOSED HoopNet")
+    # LOWER
+    display.flash_backlight(0.025, 100)
     switch_controller.set_state(False)
     global door_lifted
     door_lifted = False
