@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/sudo /usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # ES1050 T24HoopNet

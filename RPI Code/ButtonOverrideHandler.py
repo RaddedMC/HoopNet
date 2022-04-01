@@ -1,3 +1,5 @@
+#!/usr/bin/sudo /usr/bin/python3
+
 # ES1050 T24HoopNet
 # Overridder.py
 # Programmed by JamesN / Radded
