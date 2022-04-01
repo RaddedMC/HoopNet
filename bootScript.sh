@@ -3,5 +3,5 @@
 
 cd "/home/pi/HoopNet/RPI Code/"
 
-python main.py &
-python ButtonOverrideHandler.py &
+python3 main.py &
+python3 ButtonOverrideHandler.py &

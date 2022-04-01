@@ -25,7 +25,7 @@ class thresholds:
     THRESHOLD_HUMIDITY = 0
 
 # THRESHOLDS, to be moved to a file later
-threshold = 17 # number
+threshold = 40 # number
 threshold_type = thresholds.THRESHOLD_HUMIDITY
 
 # OUTPUTS, to be moved to a file later
@@ -70,7 +70,7 @@ def main():
 
             # TODO: Add text to say if overriden??
             #                1234567890123456
-            display.display("Humidity:  {0:0.1f}%Temp:     {1:0.1f} C".format(sensor_average[0], sensor_average[1]))
+            display.display("Humidity: {0:0.1f} %Temp:     {1:0.1f} C".format(sensor_average[0], sensor_average[1]))
             print("Current Humidity: {0:0.1f}%, Current Temperature: {1:0.1f}ºC".format(sensor_average[0], sensor_average[1]))
 
             
@@ -110,7 +110,7 @@ def setup():
     """
     global display
     display = Display.Display()
-    display.display("HoopNet is starting up...")
+    display.display("HoopNet is      starting up...")
 
     global sensor_controller
     sensor_controller = SensorController(sensor_pins)
