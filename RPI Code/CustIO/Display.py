@@ -47,7 +47,7 @@ class Display:
         self.backlight_state = state
         self.lcd.backlight_enabled = state
 
-    def __flash_backlight_async(self, data):
+    def _flash_backlight_async(self, data):
         for i in range(0,data[1]*2):
             self.backlight_state = not self.backlight_state
             self.lcd.backlight_enabled = not self.lcd.backlight_enabled
@@ -55,7 +55,8 @@ class Display:
 
     # TODO: fix
     def flash_backlight(self, delay, flashes):
-        self.__run_proc_from_method_(self.__flash_backlight_async, (delay, flashes))
+       data = [delay, flashes]
+       self.__run_proc_from_method_(self._flash_backlight_async, data)
 
     def __run_proc_from_method_(self, method, data):
         """Don't use this! This is used to handle multiprocessing."""
@@ -64,5 +65,5 @@ class Display:
         if self.__proc__ != None and self.__proc__.is_alive():
             self.__proc__.kill()
 
-        self.__proc__ = multiprocessing.Process(target=method, args=data)
+        self.__proc__ = multiprocessing.Process(target=method, args=(data,))
         self.__proc__.start()

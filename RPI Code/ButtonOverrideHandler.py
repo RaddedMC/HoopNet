@@ -1,3 +1,5 @@
+#!/usr/bin/sudo /usr/bin/python3
+
 # ES1050 T24HoopNet
 # Overridder.py
 # Programmed by JamesN / Radded
@@ -30,15 +32,15 @@ def on_press():
 
     if state == States.auto:
         print("Set to AUTO")
-        os.system("python Overrider.py auto")
+        os.system("python3 Overrider.py auto")
     elif state == States.override_closed:
         # DO OTHER THING
         print("Set to CLOSE")
-        os.system("python Overrider.py close")
+        os.system("python3 Overrider.py close")
     else:
         # DO FINAL THING
         print("Set to OPEN")
-        os.system("python Overrider.py open")
+        os.system("python3 Overrider.py open")
 
 # Makes sure command is ran in right place
 os.chdir(os.path.dirname(os.path.realpath(__file__)))

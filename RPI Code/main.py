@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/sudo /usr/bin/python3
 # -*- coding: utf-8 -*-
 
 # ES1050 T24HoopNet
@@ -25,7 +25,7 @@ class thresholds:
     THRESHOLD_HUMIDITY = 0
 
 # THRESHOLDS, to be moved to a file later
-threshold = 17 # number
+threshold = 40 # number
 threshold_type = thresholds.THRESHOLD_HUMIDITY
 
 # OUTPUTS, to be moved to a file later
@@ -70,7 +70,7 @@ def main():
 
             # TODO: Add text to say if overriden??
             #                1234567890123456
-            display.display("Humidity:  {0:0.1f}%Temp:     {1:0.1f} C".format(sensor_average[0], sensor_average[1]))
+            display.display("Humidity: {0:0.1f} %Temp:     {1:0.1f} C".format(sensor_average[0], sensor_average[1]))
             print("Current Humidity: {0:0.1f}%, Current Temperature: {1:0.1f}ºC".format(sensor_average[0], sensor_average[1]))
 
             
@@ -92,7 +92,8 @@ def main():
                     print("Opening doors!")
                 else: 
                     print("Lowering doors!")
-                
+                # LIFT OR LOWER
+                display.flash_backlight(0.025, 100)
                 switch_controller.set_state(door_lifted)
             
             time.sleep(wait_time) # Sleep to give the doors time to move and the readings time to settle.
@@ -110,7 +111,8 @@ def setup():
     """
     global display
     display = Display.Display()
-    display.display("HoopNet is starting up...")
+    display.display("HoopNet is      starting up...")
+    display.flash_backlight(0.1, 10)
 
     global sensor_controller
     sensor_controller = SensorController(sensor_pins)
@@ -137,13 +139,17 @@ def handle_signal_stop_high():
     print("OVERRIDE: Lift!")
     global display
     display.display("Override: OPEN   HoopNet")
+    # LIFT
     switch_controller.set_state(True)
+    display.flash_backlight(0.025, 100)
     global door_lifted
     door_lifted = True
 
 def handle_signal_stop_low():
     global switch_controller
     display.display("Override: CLOSED HoopNet")
+    # LOWER
+    display.flash_backlight(0.025, 100)
     switch_controller.set_state(False)
     global door_lifted
     door_lifted = False
